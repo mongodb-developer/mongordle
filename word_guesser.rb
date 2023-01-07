@@ -78,8 +78,10 @@ criteria = possible_matches(ARGV)
 
 puts criteria.to_json
 
-collection.find(criteria, {:projection => {'_id': 1}}).each do |document|
-     puts document['_id']
+ids = collection.find(criteria, {:projection => {'_id': 1}}).collect{|d| d['_id']}.sort
+
+ids.each do |id|
+     puts id
 end
 
 puts collection.find(criteria, {:projection => {'_id': 1}}).count
