@@ -17,18 +17,19 @@ Then, as you play [Wordle](https://www.nytimes.com/games/wordle/index.html), run
 
 ![](examples/guess1.png)
 
-    $ ruby word_guesser.rb "WORDY xx^xx"
-    {"letters":{"$nin":["W","O","D","Y"],"$all":["R"]},"letter3":{"$eq":"R"}}
-    AGREE
-    BARGE
+    $ ruby word_guesser.rb "ZESTY x~xxx"               
+    {"letters":{"$nin":["Z","S","T","Y"],"$all":["E"]},"letter2":{"$nin":["E"]}}
+    ABIDE
+    ABLED
+    ABODE
+    ABOVE
     .
     .
     .
-    VERGE
-    VERVE
-    VIRAL
-    VIRUS
-    73
+    WOVEN
+    WREAK
+    WRECK
+    394
 
 The output consists first of the constraints used on the `.find()` call to Atlas, for insight into how the guesses and associated match patterns are used to filter to the remaining possible solutions.  Following the constraint criteria is a list of all possible solutions remaining, followed by the count of them.
 
@@ -42,9 +43,9 @@ Continuing with the above example, picking one of the words returned:
 
 ![](examples/guess2.png)
 
-    $ ruby word_guesser.rb "WORDY xx^xx" "SCRUM ~x^x~"
-    {"letters":{"$nin":["W","O","D","Y","C","U"],"$all":["R","S","M"]},"letter1":{"$nin":["S"]},"letter3":{"$eq":"R"},"letter5":{"$nin":["M"]}}
-    MARSH
+    $ ruby word_guesser.rb "ZESTY x~xxx" "BREAD x~^~x" 
+    {"letters":{"$nin":["Z","S","T","Y","B","D"],"$all":["E","R","A"]},"letter2":{"$nin":["E","R"]},"letter3":{"$eq":"E"},"letter4":{"$nin":["A"]}}
+    OPERA
     1
 
 Voila, a win in three tries!
